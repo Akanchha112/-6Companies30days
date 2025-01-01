@@ -1,0 +1,26 @@
+1401. Circle and Rectangle Overlapping
+You are given a circle represented as (radius, xCenter, yCenter) and an axis-aligned rectangle represented as (x1, y1, x2, y2), where (x1, y1) are the coordinates of the bottom-left corner, and (x2, y2) are the coordinates of the top-right corner of the rectangle.
+
+Return true if the circle and rectangle are overlapped otherwise return false. In other words, check if there is any point (xi, yi) that belongs to the circle and the rectangle at the same time.
+
+class Solution {
+public:
+    bool checkOverlap(int radius, int xCenter, int yCenter, int x1, int y1, int x2, int y2) {
+        //1st try
+        // int xc=xCenter, yc=yCenter, r= radius;
+        // if(xc<=x2&& yc<=y2 && xc>=x1 && yc>=y1){
+        //     return true;
+        // }
+        // else if(xc-r<=x2&& yc-r<=y2 && xc+r>=x1 && yc+r>=y1){
+        //     return true;
+        // }
+        // return false;
+        //2nd try
+        int xc = xCenter, yc = yCenter, r = radius;
+        int closestX = std::max(x1, std::min(xc, x2));
+        int closestY = std::max(y1, std::min(yc, y2));
+        int dx = xc - closestX;
+        int dy = yc - closestY;
+        return dx * dx + dy * dy <= r * r;
+    }
+};
